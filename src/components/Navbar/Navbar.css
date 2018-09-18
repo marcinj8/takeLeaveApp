@@ -1,0 +1,9 @@
+.navbar {
+  background: rgb(104, 104, 104);
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  z-index: 200;
+  box-shadow: 0 10px 15px rgb(36, 36, 36);
+  border-bottom: 1px solid rgb(26, 26, 26);
+}

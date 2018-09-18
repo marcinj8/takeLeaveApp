@@ -1,0 +1,117 @@
+.calendar__day {
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  border: 1px solid rgb(255, 255, 255);
+  padding-top: 15px;
+  transition: all .2s ease-in-out;
+}
+
+.calendar__day--weekend {
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  background: rgb(170, 255, 174);
+  border: 1px solid rgb(0, 255, 55);
+  padding-top: 15px;
+  box-shadow: inset 0px 0px 6px 1px rgba(0,0,0,0.75);
+  transition: all .2s ease-in-out;
+}
+
+.calendar__day--active {
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  background: rgb(175, 175, 175);
+  border: 1px solid black;
+  cursor: pointer;
+  padding-top: 15px;
+  transition: all .2s ease-in-out;
+}
+
+.calendar__day--active:hover {
+  transform: scale(1.2);
+  background: rgb(124, 124, 124);
+  border: 1px solid black;
+  z-index: 100;
+  box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.9);
+}
+
+.calendar__day--blocked {
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  background: rgb(255, 106, 106);
+  border: 1px solid rgb(255, 0, 0);
+  cursor: pointer;
+  padding-top: 15px;
+  transition: all .2s ease-in-out;
+}
+
+.calendar__day--blocked:hover {
+  background: rgb(255, 89, 89);
+  border: 1px solid rgb(139, 0, 0);
+  color: rgb(255, 0, 0);
+  transform: scale(1.2);
+  z-index: 100;
+  box-shadow: 1px 1px 3px 1px rgba(255, 63, 63, 0.75);
+}
+
+.currentDay {
+  background: rgb(120, 120, 255);
+  color: rgb(0, 0, 75);
+}
+
+.currentDay:hover {
+  background: rgb(120, 120, 255);
+  border: 2px solid rgb(0, 2, 114);
+  color: rgb(0, 0, 75);
+  transform: scale(1.1);
+  z-index: 100;
+  cursor: default;
+  box-shadow: 1px 1px 3px 1px rgba(12, 0, 83, 0.75);
+}
+
+.leaves {
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  border: 1px solid rgb(255, 0, 0);
+  background: rgb(255, 67, 67);
+  padding-top: 15px;
+  transition: all .2s ease-in-out;
+  transform: scale(0.9)
+}
+
+.leaves:hover{
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  border: 1px solid rgb(255, 0, 0);
+  background: rgb(255, 67, 67);
+  padding-top: 15px;
+  transition: all .2s ease-in-out;
+  transform: scale(0.9)
+}
+
+.choosenDay {
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  border: 1px solid rgb(30, 255, 0);
+  background: rgb(180, 255, 67);
+  padding-top: 15px;
+  transition: all .2s ease-in-out;
+  transform: scale(0.9)
+}
+
+.employeeLeaves {
+  box-sizing: border-box;
+  width: 40px;
+  height: 50px;
+  border: 1px solid rgb(30, 255, 0);
+  background: rgb(41, 255, 41);
+  padding-top: 15px;
+  transition: all .2s ease-in-out;
+  transform: scale(0.9)
+}

@@ -1,0 +1,17 @@
+.userPanel__form {
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 98%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.userPanel__button{
+  margin-top: 15px;
+}
+
+@media(min-width: 760px) {
+  .userPanel__form {
+    flex-wrap: wrap;
+  }
+}
