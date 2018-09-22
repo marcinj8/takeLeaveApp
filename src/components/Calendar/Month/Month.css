@@ -9,7 +9,6 @@
 }
 
 .calendar__monthBlock--settingLeave {
-  overflow-x: scroll;
   background: rgb(216, 216, 216);
   margin: 15px auto;
   box-sizing: content-box;

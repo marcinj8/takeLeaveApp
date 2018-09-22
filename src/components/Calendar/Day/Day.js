@@ -15,7 +15,7 @@ const day = props => {
     clicked = () => false;
   } else if (props.leaves || props.disabledDates) {
     style.push('leaves');
-    clicked = () => props.clicked(props.choosenDay);
+    clicked = () => props.clicked(props.name);
   } else if (props.choosenDay) {
     style.push('choosenDay');
     clicked = () => props.clicked(props.choosenDay);
@@ -28,7 +28,7 @@ const day = props => {
   }
 
   return (
-    <div onClick={() => clicked()} className={style.join(' ')}>
+    <div onClick={clicked} className={style.join(' ')}>
       {props.day}
     </div>
   );

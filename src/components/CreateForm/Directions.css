@@ -1,9 +1,7 @@
 .form__directionsContainer {
-  font-size: .95em;
   width: 90%;
   margin: 15px auto;
-  padding-top: 20px;
-  display: flex;
+  display: block;
   flex-wrap: wrap;
   justify-content: space-around;
 }
@@ -27,8 +25,19 @@
   margin: 0;
   padding: 5px;
 }
+@media(min-width: 650px) {
+  .form__directionsContainer {
+    font-size: 1em;
+    width: 60%;
+    margin: 0 auto;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
 
-@media(min-width: 500px) {
+@media(min-width: 685px) {
   .form__directionsContainer {
     font-size: 1em;
     width: 60%;

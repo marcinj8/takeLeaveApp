@@ -47,8 +47,17 @@ const calendar = props => {
   }
 
   return (
-    <div className='calendar'>
-      {months}
+    <div className='calendarContainer'>
+      {
+        props.data.dayInfo[0]
+          ?
+          <div>Choosen date: {props.data.dayInfo[1]}/{props.data.dayInfo[2]}/{props.data.dayInfo[3]} Leave taken by: {props.data.dayInfo[0]}</div>
+          :
+          <div>Chosse taken day</div>
+      }
+      <div className='calendar'>
+        {months}
+      </div>
     </div>
   );
 };

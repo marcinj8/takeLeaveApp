@@ -1,5 +1,8 @@
-.calendar{
+.calendarContainer{
   padding-top: 80px;
+}
+
+.calendar{
   display: flex;
   flex-wrap: wrap;
 }

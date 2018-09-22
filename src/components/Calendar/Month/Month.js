@@ -9,7 +9,6 @@ const month = props => {
   let currentDay = false;
   const days = [...Array(new Date(new Date(props.year, props.month).setDate(0)).getDate())];
   const firstMonthDay = new Date(props.year, props.month - 1, 1).getDay() - 1;
-  let style = 'calendar__monthBlock';
   let childClass = [];
   let disabled = false;
   let choosenDay = false;
@@ -17,6 +16,8 @@ const month = props => {
   let pastDay = false;
   let disabledDates = false;
   let employeeLeaves = false;
+  let name = '';
+  let style = 'calendar__monthBlock';
 
 
   if (props.class) {
@@ -54,21 +55,24 @@ const month = props => {
   };
 
   const checkDate = (day, propsArg) => {
-    let fulfillCondition = false;
+    let condition = false;
     if (propsArg) {
       for (let key in propsArg) {
         if (propsArg[key].date.day === day &&
           propsArg[key].date.month === props.month) {
-          fulfillCondition = true;
-          return fulfillCondition
+          condition = true;
+          if (propsArg[key].name) {
+            name = propsArg[key].name
+          }
+          return condition
         } else {
-          fulfillCondition = false;
+          condition = false;
         }
       }
     } else {
-      fulfillCondition = false;
+      condition = false;
     }
-    return fulfillCondition;
+    return condition;
   };
 
   const dayChecking = (day) => {
@@ -83,8 +87,10 @@ const month = props => {
   days.map((__, day) => {
     let key = new Date(props.year, props.month, day + 1).getTime();
     dayChecking(day);
+
     month.push(
       <Day
+        name={name}
         leaves={leaves}
         choosenDay={choosenDay}
         disabledDates={disabledDates}

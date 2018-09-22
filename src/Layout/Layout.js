@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import Navigation from '../components/Navbar/Navbar';
 import Calendar from '../components/Calendar/Calendar';
@@ -6,15 +7,17 @@ import UserPanel from '../UI/UserPanel/UserPanel';
 
 class Layout extends Component {
   state = {
+    navigation: ['Calendar', 'Leaves Panel'],
     year: '',
     month: '',
-    showMonths: 2,
+    showMonths: 12,
     currentDay: '',
     leaves: [],
     fullCalendar: true,
-    userPanel: true,
+    userPanel: false,
     choosenDays: [],
-    dayInfo: null
+    dayInfo: '',
+    error: ''
   };
 
   componentWillMount() {
@@ -24,10 +27,45 @@ class Layout extends Component {
       month: setUpDate.getMonth() + 1,
       currentDay: setUpDate
     });
+    this.fetchCalendarData();
+  }
+
+  setUpCalendarData = data => {
+    let fetchedData = data;
+    let updateCalendar = [];
+    for (let key in fetchedData) {
+      for (let value of fetchedData[key]) {
+        updateCalendar.push(value);
+      }
+    }
+    this.setState({
+      leaves: updateCalendar
+    });
+  }
+
+  fetchCalendarData = () => {
+    axios.get(`https://setleaveday.firebaseio.com/leaves.json`)
+      .then(res => {
+        this.setUpCalendarData(res.data);
+      })
+      .catch(err => this.setState({
+        error: err.message
+      }));
+  }
+
+  changeView = () => {
+    this.setState({
+      fullCalendar: !this.state.fullCalendar,
+      userPanel: !this.state.userPanel,
+    })
   }
 
   showDetailsHandler = (...arg) => {
-    console.log(arg)
+    if(arg[0] !== undefined) {
+      this.setState({
+        dayInfo: arg
+      })
+    }
   }
 
   setChoosenDay = (day, month, year, key, name) => {
@@ -67,10 +105,17 @@ class Layout extends Component {
     }
   }
 
+  setUpLeavesDays = leaves => {
+    axios.post(`https://setleaveday.firebaseio.com/leaves.json`, leaves);
+    // .then(res => console.log(res))
+    // .catch(err => console.log(err));
+  }
+
   confirmDaysHandler = () => {
     const choosenDays = [
       ...this.state.choosenDays
     ];
+    this.setUpLeavesDays(choosenDays);
     const updateLeaves = [
       ...this.state.leaves
     ];
@@ -85,30 +130,37 @@ class Layout extends Component {
   }
 
   render() {
-    console.log(this.state)
-    return (
-      <div>
-        <Navigation />
-        {this.state.dayInfo}
-        <br />
-        <br />
-        <br />
-        <br />
-        <Calendar
-          data={this.state}
-          showDetails={this.showDetailsHandler} />
-        <UserPanel
-          leaves={this.state.leaves}
-          confirmDays={this.confirmDaysHandler}
-          chooseDay={this.choosingDayHandler}
-          choosenDays={this.state.choosenDays}
-          year={this.state.year}
-          month={this.state.month}
-          currentDay={this.state.currentDay}
-          leave={this.state.leave}
-          show={this.state.userPanel} />
-      </div >
-    );
+    let calendar = null;
+
+    if (this.state.error) {
+      calendar = this.state.error;
+    } else {
+      return calendar = (
+        <div>
+          <Navigation
+            changeView={this.changeView}
+            navigationItems={this.state.navigation} 
+            isActive={[this.state.fullCalendar, this.state.userPanel]}/>
+            <Calendar
+            data={this.state}
+            showDetails={this.showDetailsHandler} />
+            <div style={{'padding': '70px 0'}}>
+            <UserPanel
+              leaves={this.state.leaves}
+              confirmDays={this.confirmDaysHandler}
+              chooseDay={this.choosingDayHandler}
+              choosenDays={this.state.choosenDays}
+              year={this.state.year}
+              month={this.state.month}
+              currentDay={this.state.currentDay}
+              leave={this.state.leave}
+              show={this.state.userPanel} />
+          </div>
+        </div >
+      );
+    }
+
+    return calendar;
   }
 }
 
